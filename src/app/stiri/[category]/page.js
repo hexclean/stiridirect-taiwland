@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { convertDate } from "@/app/shared/convertPostedDate";
-import { fetchNews } from "../server/api";
+import { fetchNews, saveFilteredPortals, saveFilteredTag } from "../server/api";
 import Link from "next/link";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import LoadingText from "@/app/shared/LoadingText";
@@ -23,6 +23,14 @@ const CategoryDetail = ({ params }) => {
 
   const [portalFilter, setPortalFilter] = useState(true);
   const [tagFilter, setTagFilter] = useState(true);
+  const [saveFilteredPortalS, setSaveFilteredPortalS] = useState({
+    id: 0,
+    status: false,
+  });
+  const [saveFilteredTagS, setSaveFilteredTagS] = useState({
+    id: 0,
+    status: false,
+  });
 
   const openPortalFilter = () => setPortalFilter(!portalFilter);
   const openTagFilter = () => setTagFilter(!tagFilter);
@@ -64,6 +72,21 @@ const CategoryDetail = ({ params }) => {
 
   useEffect(() => {
     fetchData();
+
+    if (saveFilteredPortalS.id != 0) {
+      saveFilteredPortals(saveFilteredPortalS);
+      setSaveFilteredPortalS({
+        id: 0,
+        status: false,
+      });
+    }
+    if (saveFilteredTagS.id != 0) {
+      saveFilteredTag(saveFilteredTagS);
+      setSaveFilteredTagS({
+        id: 0,
+        status: false,
+      });
+    }
   }, [finalFilterData, currentPage]);
 
   const filterTag = (type, id) => {
@@ -110,6 +133,20 @@ const CategoryDetail = ({ params }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const saveFilteredPortal = (id, checked) => {
+    setSaveFilteredPortalS({
+      id: id,
+      status: checked,
+    });
+  };
+
+  const saveFilteredTags = (id, checked) => {
+    setSaveFilteredTagS({
+      id: id,
+      status: checked,
+    });
+  };
 
   return (
     <>
@@ -175,8 +212,15 @@ const CategoryDetail = ({ params }) => {
                     portals.map((i) => {
                       const isChecked = activePortals.includes(i.id);
                       return (
-                        <li className="mb-2" key={i.id}>
-                          <label className="inline-flex items-center">
+                        <li
+                          className="mb-2"
+                          key={i.id}
+                          onClick={() => saveFilteredPortal(i.id, isChecked)}
+                        >
+                          <label
+                            className="inline-flex items-center"
+                            // onClick={() => saveFilteredPortal(i.id, isChecked)}
+                          >
                             <input
                               type="checkbox"
                               checked={isChecked}
@@ -247,7 +291,11 @@ const CategoryDetail = ({ params }) => {
                       tags.map((i) => {
                         const isChecked = activeTags.includes(i.id);
                         return (
-                          <li className="mb-2" key={i.id}>
+                          <li
+                            className="mb-2"
+                            key={i.id}
+                            onClick={() => saveFilteredTags(i.id, isChecked)}
+                          >
                             <label className="inline-flex items-center">
                               <input
                                 type="checkbox"

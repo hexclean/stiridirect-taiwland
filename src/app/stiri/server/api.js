@@ -41,3 +41,47 @@ export const fetchNews = async (category, query, page) => {
     throw error;
   }
 };
+
+export const saveFilteredPortals = async (portal) => {
+  const { apiUrl } = config;
+
+  try {
+    const response = await fetch(`${apiUrl}/api/analytics/filtered-portal`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ portal }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save portals");
+    }
+
+    const result = await response.json();
+  } catch (error) {
+    console.error("Error saving portals:", error);
+  }
+};
+
+export const saveFilteredTag = async (tag) => {
+  const { apiUrl } = config;
+
+  try {
+    const response = await fetch(`${apiUrl}/api/analytics/filtered-tag`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tag }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save portals");
+    }
+
+    const result = await response.json();
+  } catch (error) {
+    console.error("Error saving portals:", error);
+  }
+};
