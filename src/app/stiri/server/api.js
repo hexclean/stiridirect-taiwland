@@ -85,3 +85,25 @@ export const saveFilteredTag = async (tag) => {
     console.error("Error saving portals:", error);
   }
 };
+
+export const savedArticle = async (id) => {
+  const { apiUrl } = config;
+
+  try {
+    const response = await fetch(`${apiUrl}/api/analytics/clicked-article`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to save portals");
+    }
+
+    const result = await response.json();
+  } catch (error) {
+    console.error("Error saving portals:", error);
+  }
+};

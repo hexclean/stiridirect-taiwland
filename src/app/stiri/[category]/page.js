@@ -2,7 +2,12 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { convertDate } from "@/app/shared/convertPostedDate";
-import { fetchNews, saveFilteredPortals, saveFilteredTag } from "../server/api";
+import {
+  fetchNews,
+  saveFilteredPortals,
+  saveFilteredTag,
+  savedArticle,
+} from "../server/api";
 import Link from "next/link";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import LoadingText from "@/app/shared/LoadingText";
@@ -341,6 +346,7 @@ const CategoryDetail = ({ params }) => {
                           className="flex flex-col md:flex-row mb-4 bg-white rounded transition-all cursor-pointer"
                         >
                           <div
+                            onClick={() => savedArticle(i.id)}
                             className={`flex items-start ${
                               i.title.toLowerCase().includes("a murit") ||
                               i.title.toLowerCase().includes("rip")

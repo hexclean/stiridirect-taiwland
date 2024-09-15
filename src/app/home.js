@@ -9,6 +9,7 @@ import LoadingText from "./shared/LoadingText";
 import ShareButton from "./shared/ShareButton";
 import Stories from "stories-react";
 import "stories-react/dist/index.css";
+import { savedArticle } from "./stiri/server/api";
 
 function Head(props) {
   return (
@@ -334,6 +335,7 @@ const Home = () => {
                           className="flex flex-col md:flex-row mb-4 bg-white rounded transition-all cursor-pointer"
                         >
                           <div
+                            onClick={() => savedArticle(i.id)}
                             className={`flex items-start ${
                               i.title.toLowerCase().includes("a murit") ||
                               i.title.toLowerCase().includes("rip")

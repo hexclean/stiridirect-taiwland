@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { convertDate } from "@/app/shared/convertPostedDate";
-import { fetchNews } from "../server/index";
+import { fetchNews, saveSharedArticle } from "../server/index";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import LoadingText from "@/app/shared/LoadingText";
 import Navbar from "@/app/shared/navbar";
@@ -20,6 +20,7 @@ const SharedArticleClient = ({ params }) => {
     try {
       setLoading(true);
       const res = await fetchNews(params.id);
+
       setData(res[0].data[0]);
       setLoading(false);
     } catch (error) {
@@ -37,6 +38,7 @@ const SharedArticleClient = ({ params }) => {
         1000
       );
       setToastShown(true);
+      saveSharedArticle(params.id);
     }
     if (loading == false) {
       setTimeout(() => {
