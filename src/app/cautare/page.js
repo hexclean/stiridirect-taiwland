@@ -9,6 +9,7 @@ import LoadingText from "../shared/LoadingText";
 import { fetchNews } from "./server";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ShareButton from "../shared/ShareButton";
+import { savedArticle } from "../stiri/server/api";
 
 import Link from "next/link";
 const SearchedArticle = () => {
@@ -86,6 +87,7 @@ const SearchedArticle = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex flex-col md:flex-row mb-4 bg-white rounded transition-all cursor-pointer"
+                          onClick={() => savedArticle(i.id)}
                         >
                           <div
                             className={`flex items-start ${

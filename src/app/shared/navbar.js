@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import toast from "@/app/shared/toast";
+import { saveClickedCategory } from "./server/index";
 
 import config from "../../../config/config";
 
@@ -69,6 +70,9 @@ const Navbar = () => {
       setShowValid(false);
     }
   }, [email]);
+
+  const saveCategory = (category) => saveClickedCategory(category);
+  // saveClickedCategory("politica")
 
   const saveEmail = () => {
     if (isValidEmail == true) {
@@ -217,22 +221,46 @@ const Navbar = () => {
 
         <div className="grow">
           <div className="hidden uppercase tracking-wider text-[15px] font-semibold hamburgerMenu:flex justify-center gap-3 md:gap-4">
-            <Link href="/stiri/politica?page=1" className="hover:text-blue-700">
+            <Link
+              href="/stiri/politica?page=1"
+              className="hover:text-blue-700"
+              onClick={() => saveCategory("politica")}
+            >
               Politică
             </Link>
-            <Link href="/stiri/externe?page=1" className="hover:text-blue-700">
+            <Link
+              href="/stiri/externe?page=1"
+              className="hover:text-blue-700"
+              onClick={() => saveCategory("externe")}
+            >
               Externe
             </Link>
-            <Link href="/stiri/economie?page=1" className="hover:text-blue-700">
+            <Link
+              href="/stiri/economie?page=1"
+              className="hover:text-blue-700"
+              onClick={() => saveCategory("economie")}
+            >
               Economie
             </Link>
-            <Link href="/stiri/interne?page=1" className="hover:text-blue-700">
+            <Link
+              href="/stiri/interne?page=1"
+              className="hover:text-blue-700"
+              onClick={() => saveCategory("interne")}
+            >
               Interne
             </Link>
-            <Link href="/stiri/justitie?page=1" className="hover:text-blue-700">
+            <Link
+              href="/stiri/justitie?page=1"
+              className="hover:text-blue-700"
+              onClick={() => saveCategory("justitie")}
+            >
               Justiție
             </Link>
-            <Link href="/stiri/sport?page=1" className="hover:text-blue-700">
+            <Link
+              href="/stiri/sport?page=1"
+              className="hover:text-blue-700"
+              onClick={() => saveCategory("sport")}
+            >
               Sport
             </Link>
             <span
@@ -282,6 +310,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/social?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("social")}
                   >
                     Social
                   </Link>
@@ -290,6 +319,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/educatie?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("educatie")}
                   >
                     Educație
                   </Link>
@@ -298,6 +328,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/meteo?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("meteo")}
                   >
                     Vremea
                   </Link>
@@ -306,6 +337,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/technologie?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("technologie")}
                   >
                     Technologie
                   </Link>
@@ -314,6 +346,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/opinii?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("opinii")}
                   >
                     Opinii
                   </Link>
@@ -326,6 +359,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/bani-afaceri?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("bani-afaceri")}
                   >
                     Bani și afaceri
                   </Link>
@@ -334,6 +368,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/cultura?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("cultura")}
                   >
                     Cultură
                   </Link>
@@ -342,6 +377,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/sanatate?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("sanatate")}
                   >
                     Sănătate
                   </Link>
@@ -350,6 +386,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/stiinta?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("stiinta")}
                   >
                     Știință
                   </Link>
@@ -358,6 +395,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/life?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("life")}
                   >
                     Life
                   </Link>
@@ -370,6 +408,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/auto?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("auto")}
                   >
                     Auto
                   </Link>
@@ -378,6 +417,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/horoscop?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("horoscop")}
                   >
                     Horoscop
                   </Link>
@@ -386,6 +426,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/vedete?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("vedete")}
                   >
                     Vedețe
                   </Link>
@@ -394,6 +435,7 @@ const Navbar = () => {
                   <Link
                     href="/stiri/video?page=1"
                     className="flex items-center hover:text-blue-700 group"
+                    onClick={() => saveCategory("video")}
                   >
                     Video
                   </Link>
@@ -445,36 +487,42 @@ const Navbar = () => {
                     <Link
                       href="/stiri/politica?page=1"
                       className="hover:text-blue-700"
+                      onClick={() => saveCategory("politica")}
                     >
                       Politică
                     </Link>
                     <Link
                       href="/stiri/externe?page=1"
                       className="hover:text-blue-700"
+                      onClick={() => saveCategory("externe")}
                     >
                       Externe
                     </Link>
                     <Link
                       href="/stiri/economie?page=1"
                       className="hover:text-blue-700"
+                      onClick={() => saveCategory("economie")}
                     >
                       Economie
                     </Link>
                     <Link
                       href="/stiri/interne?page=1"
                       className="hover:text-blue-700"
+                      onClick={() => saveCategory("interne")}
                     >
                       Interne
                     </Link>
                     <Link
                       href="/stiri/justitie?page=1"
                       className="hover:text-blue-700"
+                      onClick={() => saveCategory("justitie")}
                     >
                       Justiție
                     </Link>
                     <Link
                       href="/stiri/sport?page=1"
                       className="hover:text-blue-700"
+                      onClick={() => saveCategory("sport")}
                     >
                       Sport
                     </Link>
@@ -506,84 +554,98 @@ const Navbar = () => {
                         <Link
                           href="/stiri/social?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("social")}
                         >
                           Social
                         </Link>
                         <Link
                           href="/stiri/educatie?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("educatie")}
                         >
                           Educație
                         </Link>
                         <Link
                           href="/stiri/meteo?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("meteo")}
                         >
                           Vremea
                         </Link>
                         <Link
                           href="/stiri/technologie?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("technologie")}
                         >
                           Technologie
                         </Link>
                         <Link
                           href="/stiri/opinii?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("opinii")}
                         >
                           Opinii
                         </Link>
                         <Link
                           href="/stiri/bani-afaceri?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("bani-afaceri")}
                         >
                           Bani și afaceri
                         </Link>
                         <Link
                           href="/stiri/cultura?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("cultura")}
                         >
                           Cultură
                         </Link>
                         <Link
                           href="/stiri/sanatate?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("sanatate")}
                         >
                           Sănătate
                         </Link>
                         <Link
                           href="/stiri/stiinta?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("stiinta")}
                         >
                           Știință
                         </Link>
                         <Link
                           href="/stiri/life?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("life")}
                         >
                           Life
                         </Link>
                         <Link
                           href="/stiri/auto?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("auto")}
                         >
                           Auto
                         </Link>
                         <Link
                           href="/stiri/horoscop?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("horoscop")}
                         >
                           Horoscop
                         </Link>
                         <Link
                           href="/stiri/vedete?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("vedete")}
                         >
                           Vedețe
                         </Link>
                         <Link
                           href="/stiri/video?page=1"
                           className="hover:text-blue-700"
+                          onClick={() => saveCategory("video")}
                         >
                           Video
                         </Link>
