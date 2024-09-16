@@ -17,7 +17,6 @@ export const saveClickedCategory = async (category) => {
       }
     );
 
-    console.log(response);
     if (!response.ok) {
       throw new Error("Failed to save portals");
     }
